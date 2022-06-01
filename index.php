@@ -1,4 +1,4 @@
-<?php 
+<?php   
     include_once("./calculadora.php");
 ?>
 
@@ -7,46 +7,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculadora de daño</title>
-     
 </head>
 <body>
-    <h2>Calculadora de daño: </h2>
-    <br>
+    <h2>Calculadora de daño</h2>
     <form action="./index.php" method="POST">
-        <label> Vida actual <label>
-        <input type="number" name="Vida actual">
-        <br>
-        <br>
-        <label> Seleccionar el tipo de ataque: <label>
-        <select name="ataque">
-            <option value="golpe">Golpe</option> 
+        <label for="vida"> Vida Acutal: </label> 
+        <input type="number" max="100" min="0" name="vida">
+
+        <br> <br> <br>
+
+        <label for="ataque">Seleccione el tipo de ataque: </label><select name="ataque"> 
+            <option value="golpe">Golpe</option>
             <option value="patada">Patada</option>
-            <option value="espadazo">Espadazo</option>  
-        <select> 
+            <option value="espadazo">Espadazo</option>
+        </select>
+
+        <br><br> <br>
+
+        <label for="pocion"> Seleccione el tipo de pocion: </label>
         <br>
+        <input type="radio" name="pocion" value="1"> <span> Veneno </span>
         <br>
-        <label for= "Pocion"> Seleccione el tipo de poscion: <label>
-        <input type="radio" name="Pocion" value = "Veneno"> <span> Veneno</span>
-        <input type="radio" name="Pocion" value = "Fuego"> <span>Fuego</span>
-        <input type="radio" name="Pocion" value = "Adormecimiento">  <span>Adormecimiento</span>
-    
+        <input type="radio" name="pocion" value="2"> <span> Fuego</span>
         <br>
-        <br>
-        <input type="submit" value="Calcular">
+        <input type="radio" name="pocion" value="3"> <span> Adormecimiento</span>
+
+        <br><br><br>
+
+        <input type="submit" name="Aceptar" value="Aceptar"> 
+
     </form>
 
+    <?php
+        if(isset($_POST["ataque"]))
+        {
+            echo("<h3>Vida restante: ".calcularVida($_POST["vida"], $_POST["ataque"], $_POST["pocion"])."</h3>");
+        }
+    ?>
+
+    
 
 </body>
 </html>
-
-<?php
-
-    $vida = $_POST ['vida'];
-    $ataque = $_POST ['ataque'];
-    $pocion = $_POST ['pocion'];
-
-        if(isset($_POST["ataque"]))
-        {
-            echo "<h3> Vida en el proximo turno: " . calcularVida ($vida, $ataque, $pocion) . "</h3>";
-        }
-    ?>
